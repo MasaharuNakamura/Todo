@@ -12,6 +12,7 @@ type User {
 
 type Query {
   user(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): User!
+  userUnique(where: UserWhereUniqueInput!): User!
 }
 
 input UserWhereInput {

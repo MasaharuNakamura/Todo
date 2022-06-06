@@ -4,6 +4,7 @@ import { User } from 'src/@generated/prisma-nestjs-graphql/user/user.model'
 import { CreateOneUserArgs } from 'src/@generated/prisma-nestjs-graphql/user/create-one-user.args';
 import { UsersService } from 'src/users/users.service';
 import { FindFirstUserArgs } from 'src/@generated/prisma-nestjs-graphql/user/find-first-user.args';
+import { FindUniqueUserArgs } from "src/@generated/prisma-nestjs-graphql/user/find-unique-user.args";
 
 @Resolver(() => User)
 export class UsersResolver {
@@ -15,6 +16,13 @@ export class UsersResolver {
     ) {
         return this.userService.findFirst(args)
     }
+
+    @Query(() => User)
+    userUnique(@Args() args: FindUniqueUserArgs){
+        return this.userService.findUnique(args);
+    }
+
+    
 
     @Mutation(() => User)
     async createUser(
