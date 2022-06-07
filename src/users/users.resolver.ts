@@ -5,12 +5,15 @@ import { CreateOneUserArgs } from 'src/@generated/prisma-nestjs-graphql/user/cre
 import { UsersService } from 'src/users/users.service';
 import { FindFirstUserArgs } from 'src/@generated/prisma-nestjs-graphql/user/find-first-user.args';
 import { FindUniqueUserArgs } from "src/@generated/prisma-nestjs-graphql/user/find-unique-user.args";
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Resolver(() => User)
 export class UsersResolver {
     constructor(private readonly userService: UsersService) {}
 
     @Query(() => User)
+      @UseGuards(JwtAuthGuard)
     user(
         @Args() args: FindFirstUserArgs
     ) {
