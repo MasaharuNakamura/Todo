@@ -15,9 +15,21 @@ type LoginResponse {
   user: User!
 }
 
+type Todo {
+  id: ID!
+
+  """@validator.@IsNotEmpty()"""
+  title: String!
+
+  """@validator.@IsNotEmpty()"""
+  disctiption: String!
+  completed: Boolean
+}
+
 type Query {
   user(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): User!
   userUnique(where: UserWhereUniqueInput!): User!
+  todoUnique(where: TodoWhereUniqueInput!): Todo!
 }
 
 input UserWhereInput {
@@ -106,9 +118,16 @@ enum UserScalarFieldEnum {
   updatedAt
 }
 
+input TodoWhereUniqueInput {
+  id: Int
+}
+
 type Mutation {
   createUser(data: UserCreateInput!): User!
   login(loginUserInput: LoginUserInput!): LoginResponse!
+  createTodo(data: TodoCreateInput!): Todo!
+  todoUpdate(data: TodoUpdateInput!, where: TodoWhereUniqueInput!): Todo!
+  todoDelete(where: TodoWhereUniqueInput!): Todo!
 }
 
 input UserCreateInput {
@@ -120,4 +139,24 @@ input UserCreateInput {
 input LoginUserInput {
   email: String!
   password: String!
+}
+
+input TodoCreateInput {
+  title: String!
+  disctiption: String!
+  completed: Boolean
+}
+
+input TodoUpdateInput {
+  title: StringFieldUpdateOperationsInput
+  disctiption: StringFieldUpdateOperationsInput
+  completed: NullableBoolFieldUpdateOperationsInput
+}
+
+input StringFieldUpdateOperationsInput {
+  set: String
+}
+
+input NullableBoolFieldUpdateOperationsInput {
+  set: Boolean
 }

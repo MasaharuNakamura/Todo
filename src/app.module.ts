@@ -7,6 +7,7 @@ import { PrismaService } from './prisma.service';
 import { UsersModule } from './users/users.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { AuthModule } from './auth/auth.module';
+import { TodoModule } from './todo/todo.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { AuthModule } from './auth/auth.module';
     }),
     UsersModule,
     AuthModule,
+    TodoModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],
