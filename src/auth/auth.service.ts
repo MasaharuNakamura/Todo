@@ -1,9 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from 'src/users/users.service';
 import { User } from 'src/@generated/prisma-nestjs-graphql/user/user.model';
 import * as bcrypt from 'bcrypt';
 import { LoginResponse } from 'src/auth/dto/login-response';
+import { Tokens } from 'src/auth/types/tokens.type';
+import { JwtPayload } from 'src/auth/types/jwt-payload.type';
 
 @Injectable()
 export class AuthService {
@@ -23,11 +25,71 @@ export class AuthService {
   }
 
   async login(user: User): Promise<LoginResponse> {
-    const payload = { email: user.email, sub: user.id };
+    const tokens = await this.getTokens(user);
+     await this.updateHashedRefreshToken(user, tokens.refresh_token);
 
     return {
-      access_token: this.jwtService.sign(payload),
-      user: user
+      ...tokens,
+       user: user,
+    };
+  }
+
+  async refreshToken(
+    user: User,
+    authorization: string,
+  ): Promise<LoginResponse> {
+    const refreshToken = authorization.replace('Bearer', '').trim();
+
+    if (!bcrypt.compareSync(refreshToken, user.hashedRefreshToken)) {
+      throw new UnauthorizedException();
+    }
+
+    const tokens = await this.getTokens(user);
+    await this.updateHashedRefreshToken(user, tokens.refresh_token);
+
+    return {
+      ...tokens,
+      user: user,
+    };
+  }
+
+  async logout(user: User): Promise<boolean> {
+    await this.usersService.update({
+      where: { id: user.id },
+      data: { hashedRefreshToken: { set: null } },
+    });
+
+    return true;
+  }
+
+  async updateHashedRefreshToken(
+    user: User,
+    refreshToken: string,
+  ): Promise<void> {
+    const hashedRefreshToken = bcrypt.hashSync(refreshToken, 10);
+    await this.usersService.update({
+      where: { id: user.id },
+      data: { hashedRefreshToken: { set: hashedRefreshToken } },
+    });
+  }
+
+  async getTokens(user: User): Promise<Tokens> {
+    const payload: JwtPayload = { email: user.email, sub: user.id };
+
+    const [accessToken, refreshToken] = await Promise.all([
+      this.jwtService.signAsync(payload, {
+        secret: process.env.JWT_SECRET,
+        expiresIn: '15m',
+      }),
+      this.jwtService.signAsync(payload, {
+        secret: process.env.JWT_REFRESH_SECRET,
+        expiresIn: '7d',
+      }),
+    ]);
+
+    return {
+      access_token: accessToken,
+      refresh_token: refreshToken,
     };
   }
 }

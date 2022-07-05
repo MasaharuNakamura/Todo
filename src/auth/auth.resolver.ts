@@ -4,6 +4,7 @@ import { AuthService } from 'src/auth/auth.service';
 import { LoginResponse } from 'src/auth/dto/login-response';
 import { LoginUserInput } from 'src/auth/dto/login-user.input';
 import { GqlAuthGuard } from 'src/auth/guards/gpl-auth.guard';
+import { JwtRefreshAuthGuard } from './guards/jwt-refresh-auth.guard';
 
 @Resolver()
 export class AuthResolver {
@@ -16,5 +17,22 @@ export class AuthResolver {
         @Context() context
     ) {
         return this.authService.login(context.user)
+    }
+
+    @Mutation(() => LoginResponse)
+    @UseGuards(JwtRefreshAuthGuard)
+    async refreshToken(@Context() context) {
+      return this.authService.refreshToken(
+        context.req.user,
+        context.req.headers.authorization,
+      );
+    }
+  
+    @Mutation(() => Boolean)
+    @UseGuards(JwtRefreshAuthGuard)
+    async logout(@Context() context) {
+      return this.authService.logout(
+        context.req.user
+      );
     }
 }

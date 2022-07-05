@@ -18,6 +18,9 @@ export class UserMinAggregateInput {
     password?: true;
 
     @HideField()
+    hashedRefreshToken?: true;
+
+    @HideField()
     createdAt?: true;
 
     @HideField()

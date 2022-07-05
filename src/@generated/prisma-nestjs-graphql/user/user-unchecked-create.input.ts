@@ -22,6 +22,9 @@ export class UserUncheckedCreateInput {
     password!: string;
 
     @HideField()
+    hashedRefreshToken?: string;
+
+    @HideField()
     createdAt?: Date | string;
 
     @HideField()

@@ -12,6 +12,7 @@ type User {
 
 type LoginResponse {
   access_token: String!
+  refresh_token: String!
   user: User!
 }
 
@@ -114,6 +115,7 @@ enum UserScalarFieldEnum {
   email
   name
   password
+  hashedRefreshToken
   createdAt
   updatedAt
 }
@@ -125,6 +127,8 @@ input TodoWhereUniqueInput {
 type Mutation {
   createUser(data: UserCreateInput!): User!
   login(loginUserInput: LoginUserInput!): LoginResponse!
+  refreshToken: LoginResponse!
+  logout: Boolean!
   createTodo(data: TodoCreateInput!): Todo!
   todoUpdate(data: TodoUpdateInput!, where: TodoWhereUniqueInput!): Todo!
   todoDelete(where: TodoWhereUniqueInput!): Todo!

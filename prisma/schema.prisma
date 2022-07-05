@@ -37,6 +37,8 @@ datasource db {
   /// @HideField()
   /// @Validator.MinLength(8)
   password    String
+   /// @HideField({ input: true, output: true })
+  hashedRefreshToken String?
   /// @HideField({ input: true, output: true })
   createdAt DateTime @default(now())
   /// @HideField({ input: true, output: true })

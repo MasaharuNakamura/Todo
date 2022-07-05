@@ -22,6 +22,9 @@ export class User {
     password!: string;
 
     @HideField()
+    hashedRefreshToken!: string | null;
+
+    @HideField()
     createdAt!: Date;
 
     @HideField()

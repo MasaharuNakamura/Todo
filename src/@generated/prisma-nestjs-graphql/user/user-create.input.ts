@@ -18,6 +18,9 @@ export class UserCreateInput {
     password!: string;
 
     @HideField()
+    hashedRefreshToken?: string;
+
+    @HideField()
     createdAt?: Date | string;
 
     @HideField()

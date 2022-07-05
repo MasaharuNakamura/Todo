@@ -19,6 +19,9 @@ export class UserCountAggregate {
     password!: number;
 
     @HideField()
+    hashedRefreshToken!: number;
+
+    @HideField()
     createdAt!: number;
 
     @HideField()

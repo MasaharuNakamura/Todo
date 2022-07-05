@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from "passport-jwt";
 import { User } from 'src/@generated/prisma-nestjs-graphql/user/user.model';
+import { JwtPayload } from 'src/auth/types/jwt-payload.type';
 import { UsersService } from 'src/users/users.service';
 
 @Injectable()
@@ -14,7 +15,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         })
     }
 
-    async validate(payload: { email: string, sub: string }): Promise<User | null> {
+    async validate(payload: JwtPayload): Promise<User | null> {
         return this.usersService.findUnique({where: {email: payload.email}});
     }
 }

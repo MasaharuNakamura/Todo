@@ -19,6 +19,9 @@ export class UserMaxOrderByAggregateInput {
     password?: keyof typeof SortOrder;
 
     @HideField()
+    hashedRefreshToken?: keyof typeof SortOrder;
+
+    @HideField()
     createdAt?: keyof typeof SortOrder;
 
     @HideField()

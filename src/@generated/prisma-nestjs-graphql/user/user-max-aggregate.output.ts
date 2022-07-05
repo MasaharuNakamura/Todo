@@ -19,6 +19,9 @@ export class UserMaxAggregate {
     password?: string;
 
     @HideField()
+    hashedRefreshToken?: string;
+
+    @HideField()
     createdAt?: Date | string;
 
     @HideField()

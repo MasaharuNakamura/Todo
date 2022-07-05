@@ -24,6 +24,9 @@ export class UserGroupBy {
     password!: string;
 
     @HideField()
+    hashedRefreshToken?: string;
+
+    @HideField()
     createdAt!: Date | string;
 
     @HideField()
