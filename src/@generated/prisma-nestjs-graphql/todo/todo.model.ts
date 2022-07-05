@@ -18,7 +18,7 @@ export class Todo {
      * @validator.@IsNotEmpty()
      */
     @Field(() => String, {nullable:false,description:'@validator.@IsNotEmpty()'})
-    disctiption!: string;
+    description!: string;
 
     @Field(() => Boolean, {nullable:true,defaultValue:false})
     completed!: boolean | null;

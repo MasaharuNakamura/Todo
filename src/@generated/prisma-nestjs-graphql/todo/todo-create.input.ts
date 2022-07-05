@@ -8,7 +8,7 @@ export class TodoCreateInput {
     title!: string;
 
     @Field(() => String, {nullable:false})
-    disctiption!: string;
+    description!: string;
 
     @Field(() => Boolean, {nullable:true})
     completed?: boolean;

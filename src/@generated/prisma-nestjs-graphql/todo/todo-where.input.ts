@@ -23,7 +23,7 @@ export class TodoWhereInput {
     title?: StringFilter;
 
     @Field(() => StringFilter, {nullable:true})
-    disctiption?: StringFilter;
+    description?: StringFilter;
 
     @Field(() => BoolNullableFilter, {nullable:true})
     completed?: BoolNullableFilter;

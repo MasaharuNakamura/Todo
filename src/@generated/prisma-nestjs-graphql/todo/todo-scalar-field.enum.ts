@@ -3,7 +3,7 @@ import { registerEnumType } from '@nestjs/graphql';
 export enum TodoScalarFieldEnum {
     id = "id",
     title = "title",
-    disctiption = "disctiption",
+    description = "description",
     completed = "completed"
 }
 

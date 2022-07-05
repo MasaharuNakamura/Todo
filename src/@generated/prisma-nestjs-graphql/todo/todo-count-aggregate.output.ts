@@ -12,7 +12,7 @@ export class TodoCountAggregate {
     title!: number;
 
     @Field(() => Int, {nullable:false})
-    disctiption!: number;
+    description!: number;
 
     @Field(() => Int, {nullable:false})
     completed!: number;

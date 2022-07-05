@@ -14,7 +14,7 @@ export class TodoUncheckedUpdateInput {
     title?: StringFieldUpdateOperationsInput;
 
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    disctiption?: StringFieldUpdateOperationsInput;
+    description?: StringFieldUpdateOperationsInput;
 
     @Field(() => NullableBoolFieldUpdateOperationsInput, {nullable:true})
     completed?: NullableBoolFieldUpdateOperationsInput;

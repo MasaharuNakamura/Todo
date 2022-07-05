@@ -11,7 +11,7 @@ export class TodoMaxAggregateInput {
     title?: true;
 
     @Field(() => Boolean, {nullable:true})
-    disctiption?: true;
+    description?: true;
 
     @Field(() => Boolean, {nullable:true})
     completed?: true;

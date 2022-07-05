@@ -12,7 +12,7 @@ export class TodoMinAggregate {
     title?: string;
 
     @Field(() => String, {nullable:true})
-    disctiption?: string;
+    description?: string;
 
     @Field(() => Boolean, {nullable:true})
     completed?: boolean;

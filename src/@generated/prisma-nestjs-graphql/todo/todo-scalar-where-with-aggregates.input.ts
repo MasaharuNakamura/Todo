@@ -23,7 +23,7 @@ export class TodoScalarWhereWithAggregatesInput {
     title?: StringWithAggregatesFilter;
 
     @Field(() => StringWithAggregatesFilter, {nullable:true})
-    disctiption?: StringWithAggregatesFilter;
+    description?: StringWithAggregatesFilter;
 
     @Field(() => BoolNullableWithAggregatesFilter, {nullable:true})
     completed?: BoolNullableWithAggregatesFilter;

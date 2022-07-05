@@ -12,7 +12,7 @@ export class TodoMinOrderByAggregateInput {
     title?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
-    disctiption?: keyof typeof SortOrder;
+    description?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
     completed?: keyof typeof SortOrder;

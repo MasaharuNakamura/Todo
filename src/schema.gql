@@ -22,7 +22,7 @@ type Todo {
   title: String!
 
   """@validator.@IsNotEmpty()"""
-  disctiption: String!
+  description: String!
   completed: Boolean
 }
 
@@ -143,13 +143,13 @@ input LoginUserInput {
 
 input TodoCreateInput {
   title: String!
-  disctiption: String!
+  description: String!
   completed: Boolean
 }
 
 input TodoUpdateInput {
   title: StringFieldUpdateOperationsInput
-  disctiption: StringFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
   completed: NullableBoolFieldUpdateOperationsInput
 }
 
