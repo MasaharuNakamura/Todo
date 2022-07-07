@@ -20,7 +20,7 @@ export class UsersResolver {
 
     @Subscription(
         /*
-          //クライアントに通知（返す）値の型を定義。今回はtodoが新しく追加されたらそのtodoをクライアントに返してみるので、型はTodo
+          //クライアントに通知（返す）値の型を定義。今回はUserが新しく追加されたらそのUserをクライアントに返してみるので、型はUser
           // 
           */
         () => User,
