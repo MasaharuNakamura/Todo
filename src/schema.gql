@@ -164,3 +164,7 @@ input StringFieldUpdateOperationsInput {
 input NullableBoolFieldUpdateOperationsInput {
   set: Boolean
 }
+
+type Subscription {
+  todoAdded: Todo!
+}
