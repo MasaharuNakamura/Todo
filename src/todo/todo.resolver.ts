@@ -46,7 +46,7 @@ export class TodoResolver {
     ){
         const newTodo = this.todoService.createTodo(args);
 
-        pubsub.publish('todoAdded', { tpdoAdded: newTodo });
+        pubsub.publish('todoAdded', { todoAdded: newTodo });
         //publishしたらいつも通りmutationの戻り値を返してる。
         return newTodo;
     }
