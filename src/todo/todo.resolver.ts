@@ -6,7 +6,6 @@ import { FindUniqueTodoArgs } from 'src/@generated/prisma-nestjs-graphql/todo/fi
 import {UpdateOneTodoArgs} from 'src/@generated/prisma-nestjs-graphql/todo/update-one-todo.args';
 import {DeleteOneTodoArgs} from 'src/@generated/prisma-nestjs-graphql/todo/delete-one-todo.args';
 import { PubSub } from 'graphql-subscriptions';
-import { Post } from '@nestjs/common';
 
 /*
 PubSubインスタンスを作成。ここにWebsocketするための関数とかいい感じになるやつ全部入っとる。こいつを使いまわしていく。
@@ -40,6 +39,7 @@ export class TodoResolver {
     //     return this.todoService.createTodo(args);
     // }
 
+    //subscription
     @Mutation(() => Todo)
     async createTodo(
         @Args() args: CreateOneTodoArgs

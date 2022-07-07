@@ -166,5 +166,6 @@ input NullableBoolFieldUpdateOperationsInput {
 }
 
 type Subscription {
+  userAdded: User!
   todoAdded: Todo!
 }
